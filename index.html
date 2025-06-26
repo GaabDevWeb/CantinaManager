@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cantina manager </title>
+    <link rel="stylesheet" href="./public/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fa-solid fa-pizza-slice"></i> Cantina Manager</h1>
+        
+        <div class="stats-section">
+            <div class="stat-card">
+                <h3><i class="fa-solid fa-coins"></i> Caixa Total</h3>
+                <div class="stat-value" id="totalCash">R$ 0,00</div>
+            </div>
+            <div class="stat-card">
+                <h3><i class="fa-solid fa-money-bill-wave"></i> Dinheiro</h3>
+                <div class="stat-value" id="cashMoney">R$ 0,00</div>
+            </div>
+            <div class="stat-card">
+                <h3><i class="fa-solid fa-mobile-alt"></i> PIX</h3>
+                <div class="stat-value" id="cashPix">R$ 0,00</div>
+            </div>
+            <div class="stat-card">
+                <h3><i class="fa-solid fa-box"></i> Total de Produtos</h3>
+                <div class="stat-value" id="totalProducts">0</div>
+            </div>
+            <div class="stat-card">
+                <h3><i class="fa-solid fa-cart-shopping"></i> Vendas Hoje</h3>
+                <div class="stat-value" id="todaySales">0</div>
+            </div>
+            <div class="stat-card">
+                <h3><i class="fa-solid fa-clipboard-list"></i> Fiados Pendentes</h3>
+                <div class="stat-value" id="pendingFiados">0</div>
+            </div>
+        </div>
+        
+        <!-- Botão para mostrar/ocultar formulário de produto -->
+        <div class="add-product-toggle-section">
+            <button id="toggleProductFormBtn" class="toggle-product-btn">
+                <span class="toggle-text">Adicionar Produto</span>
+                <span class="toggle-arrow">▼</span>
+            </button>
+        </div>
+        
+        <div class="form-section" id="productFormSection" style="display: none;">
+            <h2>Adicionar Produto</h2>
+            <form id="productForm">
+                <div class="form-group">
+                    <label for="productName">Nome do Produto:</label>
+                    <input type="text" id="productName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="productPrice">Preço por Unidade (R$):</label>
+                    <input type="number" id="productPrice" step="0.01" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="productQuantity">Quantidade em Estoque:</label>
+                    <input type="number" id="productQuantity" min="0" required>
+                </div>
+                
+                <button type="submit">Adicionar Produto</button>
+            </form>
+        </div>
+        
+        <div class="products-section">
+            <h2>Produtos em Estoque</h2>
+            <div id="productsList" class="products-grid">
+                <!-- Produtos serão adicionados aqui dinamicamente -->
+            </div>
+        </div>
+        
+        <div class="fiados-toggle-section">
+            <button id="toggleFiadosBtn" class="toggle-fiados-btn">
+                <span class="toggle-icon"><i class="fa-solid fa-clipboard-list"></i></span>
+                <span class="toggle-text">Gerenciar Fiados</span>
+                <span class="toggle-arrow">▼</span>
+            </button>
+        </div>
+        
+        <div id="fiadosSection" class="fiados-section" style="display: none;">
+            <h2><i class="fa-solid fa-clipboard-list"></i> Gerenciar Fiados</h2>
+            <div class="fiados-form">
+                <form id="fiadoForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fiadoName">Nome da Pessoa:</label>
+                            <input type="text" id="fiadoName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fiadoTurma">Turma:</label>
+                            <input type="text" id="fiadoTurma" placeholder="Ex: 3ºA, 2ºB" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fiadoProduct">Produto:</label>
+                            <select id="fiadoProduct" required>
+                                <option value="">Selecione um produto</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fiadoQuantity">Quantidade:</label>
+                            <input type="number" id="fiadoQuantity" min="1" value="1" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fiadoTotal">Valor Total (R$):</label>
+                            <input type="number" id="fiadoTotal" step="0.01" min="0" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="fiadoDate">Data para Pagar:</label>
+                            <input type="date" id="fiadoDate" required>
+                        </div>
+                    </div>
+                    <button type="submit">Adicionar Fiado</button>
+                </form>
+            </div>
+            
+            <div class="fiados-controls">
+                <div class="filter-buttons">
+                    <button id="filterFiadosAll" class="filter-btn active" onclick="cantinaManager.filterFiados('all')">
+                        📋 Todos
+                    </button>
+                    <button id="filterFiadosPending" class="filter-btn" onclick="cantinaManager.filterFiados('pending')">
+                        ⏳ Pendentes
+                    </button>
+                    <button id="filterFiadosPaid" class="filter-btn" onclick="cantinaManager.filterFiados('paid')">
+                        ✅ Pagos
+                    </button>
+                </div>
+                <div class="action-buttons">
+                    <button id="clearFiadosBtn" class="clear-btn">Limpar Fiados</button>
+                    <button id="exportFiadosBtn" class="export-btn">Exportar Fiados</button>
+                </div>
+            </div>
+            
+            <div class="fiados-summary">
+                <div class="summary-item">
+                    <span class="summary-label">Total de fiados:</span>
+                    <span class="summary-value" id="totalFiadosCount">0</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Valor pendente:</span>
+                    <span class="summary-value" id="pendingFiadosValue">R$ 0,00</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Valor pago:</span>
+                    <span class="summary-value" id="paidFiadosValue">R$ 0,00</span>
+                </div>
+            </div>
+            
+            <div id="fiadosList" class="fiados-list">
+                <!-- Lista de fiados será adicionada aqui -->
+            </div>
+        </div>
+        
+        <div class="sales-section">
+            <h2><i class="fa-solid fa-chart-column"></i> Histórico de Vendas</h2>
+            <div class="sales-controls">
+                <div class="filter-buttons">
+                    <button id="filterAll" class="filter-btn active" onclick="cantinaManager.filterSales('all')">
+                        📋 Todas
+                    </button>
+                    <button id="filterMoney" class="filter-btn" onclick="cantinaManager.filterSales('money')">
+                        💵 Dinheiro
+                    </button>
+                    <button id="filterPix" class="filter-btn" onclick="cantinaManager.filterSales('pix')">
+                        📱 PIX
+                    </button>
+                </div>
+                <div class="action-buttons">
+                    <button id="clearHistoryBtn" class="clear-btn">Limpar Histórico</button>
+                    <button id="exportBtn" class="export-btn">Exportar Dados</button>
+                </div>
+            </div>
+            <div class="sales-summary">
+                <div class="summary-item">
+                    <span class="summary-label">Total de vendas:</span>
+                    <span class="summary-value" id="totalSalesCount">0</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Valor total:</span>
+                    <span class="summary-value" id="totalSalesValue">R$ 0,00</span>
+                </div>
+            </div>
+            <div id="salesHistory" class="sales-history">
+                <!-- Histórico de vendas será adicionado aqui -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para seleção de pagamento -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-credit-card"></i></h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="product-summary">
+                    <h4 id="modalProductName"></h4>
+                    <p id="modalProductPrice"></p>
+                    <div class="quantity-selector">
+                        <label for="saleQuantity">Quantidade:</label>
+                        <div class="quantity-controls-modal">
+                            <button type="button" class="quantity-btn-modal" onclick="cantinaManager.changeSaleQuantity(-1)">-</button>
+                            <input type="number" id="saleQuantity" value="1" min="1" max="999" onchange="cantinaManager.updateSaleTotal()">
+                            <button type="button" class="quantity-btn-modal" onclick="cantinaManager.changeSaleQuantity(1)">+</button>
+                        </div>
+                        <div class="total-price">
+                            <span>Total: </span>
+                            <span id="modalTotalPrice">R$ 0,00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="payment-options">
+                    <button class="payment-btn money-btn" onclick="cantinaManager.confirmSale('money')">
+                        <span class="payment-icon"><i class="fa-solid fa-money-bill-wave"></i></span>
+                        <span class="payment-text">Dinheiro</span>
+                    </button>
+                    <button class="payment-btn pix-btn" onclick="cantinaManager.confirmSale('pix')">
+                        <span class="payment-icon"><i class="fa-solid fa-mobile-alt"></i></span>
+                        <span class="payment-text">PIX</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para pagar fiado -->
+    <div id="payFiadoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fa-solid fa-credit-card"></i> Pagar Fiado</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="fiado-summary">
+                    <h4 id="modalFiadoName"></h4>
+                    <p id="modalFiadoDetails"></p>
+                    <div class="fiado-total">
+                        <span>Valor a pagar: </span>
+                        <span id="modalFiadoTotal">R$ 0,00</span>
+                    </div>
+                </div>
+                <div class="payment-options">
+                    <button class="payment-btn money-btn" onclick="cantinaManager.confirmFiadoPayment('money')">
+                        <span class="payment-icon"><i class="fa-solid fa-money-bill-wave"></i></span>
+                        <span class="payment-text">Dinheiro</span>
+                    </button>
+                    <button class="payment-btn pix-btn" onclick="cantinaManager.confirmFiadoPayment('pix')">
+                        <span class="payment-icon"><i class="fa-solid fa-mobile-alt"></i></span>
+                        <span class="payment-text">PIX</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="./public/script.js"></script>
+</body>
+</html>

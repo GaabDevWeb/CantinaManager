@@ -1,0 +1,937 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #181A1B;
+    color: #F3F3F3;
+    min-height: 100vh;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #181A1B;
+    border: none;
+    box-shadow: none;
+    overflow: hidden;
+    padding: 32px 18px 32px 18px;
+}
+
+h1, h2, h3, h4 {
+    color: #F3F3F3;
+    font-weight: 500;
+}
+
+h1 {
+    text-align: left;
+    font-size: 2em;
+    padding: 32px 0 24px 0;
+    margin: 0 0 8px 0;
+    border-bottom: 1px solid #232526;
+}
+
+h2 {
+    font-size: 1.2em;
+    margin-bottom: 18px;
+    margin-top: 0;
+}
+
+h3, h4 {
+    font-size: 1em;
+    margin-bottom: 8px;
+}
+
+.stats-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border-bottom: 1px solid #232526;
+}
+
+.stat-card {
+    flex: 1 1 0;
+    min-width: 120px;
+    background: none;
+    padding: 20px;
+    border: none;
+    text-align: left;
+    box-shadow: none;
+    border-right: 1px solid #232526;
+}
+.stat-card:last-child {
+    border-right: none;
+}
+
+.stat-value {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #7EE787;
+    margin-top: 4px;
+}
+
+.form-section, .products-section, .fiados-section, .sales-section, .fiados-toggle-section {
+    padding: 40px 0;
+    background: none;
+    border-bottom: 1px solid #232526;
+}
+
+.form-group {
+    margin-bottom: 24px;
+    padding: 0 8px;
+}
+
+.form-row {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #BDBDBD;
+}
+
+input, select {
+    width: 100%;
+    padding: 16px 16px;
+    border: 1px solid #232526;
+    background: #232526;
+    color: #F3F3F3;
+    font-size: 15px;
+    outline: none;
+    box-shadow: none;
+    border-radius: 0;
+    transition: border-color 0.2s;
+}
+input:focus, select:focus {
+    border-color: #7EE787;
+}
+
+button {
+    background: #232526;
+    color: #F3F3F3;
+    border: 1px solid #232526;
+    padding: 16px 0;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 0;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+}
+button:hover {
+    background: #282C2F;
+    color: #7EE787;
+    border-color: #7EE787;
+}
+
+.products-section {
+    border-bottom: 1px solid #232526;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 28px;
+    margin-top: 28px;
+    padding: 0 8px;
+}
+
+.product-card {
+    background: #232526;
+    border: 1px solid #232526;
+    box-shadow: none;
+    border-radius: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 40px 32px 32px 32px;
+}
+
+.product-name {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #F3F3F3;
+    margin-top: 8px;
+}
+
+.product-price {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #7EE787;
+}
+
+.product-quantity {
+    font-size: 1em;
+    color: #BDBDBD;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    justify-content: center;
+}
+
+.quantity-btn {
+    background: transparent;
+    color: #F3F3F3;
+    border: 1.5px solid #232526;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    padding: 0;
+}
+.quantity-btn:hover {
+    background: #232526;
+    color: #7EE787;
+    border-color: #7EE787;
+}
+
+.quantity-display {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #F3F3F3;
+    min-width: 36px;
+    text-align: center;
+}
+
+.delete-btn {
+    background: transparent;
+    color: #F3F3F3;
+    border: none;
+    padding: 0;
+    font-size: 22px;
+    width: 44px;
+    height: 44px;
+    margin: 18px auto 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: none;
+    transition: background 0.2s, color 0.2s;
+}
+.delete-btn:hover {
+    background: none;
+    color: #FF6F6F;
+    border: none;
+}
+
+.sell-btn {
+    background: #232526;
+    color: #7EE787;
+    border: 1px solid #7EE787;
+    padding: 8px 0;
+    font-size: 14px;
+    border-radius: 0;
+    margin-top: 8px;
+}
+.sell-btn:hover {
+    background: #181A1B;
+    color: #F3F3F3;
+    border-color: #F3F3F3;
+}
+.sell-btn:disabled {
+    background: #232526;
+    color: #555;
+    border-color: #232526;
+    cursor: not-allowed;
+}
+
+.empty-message {
+    text-align: center;
+    color: #555;
+    font-style: italic;
+    padding: 32px;
+    grid-column: 1 / -1;
+}
+
+.fiados-toggle-section {
+    padding: 18px 0;
+    background: none;
+    border-bottom: 1px solid #232526;
+}
+
+.toggle-fiados-btn {
+    background: #232526;
+    color: #F3F3F3;
+    border: 1px solid #232526;
+    padding: 12px 0;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.toggle-fiados-btn:hover, .toggle-fiados-btn.active {
+    background: #282C2F;
+    color: #7EE787;
+    border-color: #7EE787;
+}
+.toggle-icon {
+    font-size: 18px;
+}
+.toggle-text {
+    font-size: 15px;
+    font-weight: 500;
+}
+.toggle-arrow {
+    font-size: 13px;
+    transition: transform 0.3s;
+}
+.toggle-fiados-btn.active .toggle-arrow {
+    transform: rotate(180deg);
+}
+
+.fiados-section {
+    padding: 28px 0;
+    background: none;
+    border-bottom: 1px solid #232526;
+    animation: none;
+}
+
+.fiados-form {
+    background: none;
+    padding: 0;
+    border: none;
+    margin-bottom: 18px;
+    box-shadow: none;
+}
+
+.fiados-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.fiados-summary {
+    display: flex;
+    justify-content: flex-start;
+    background: none;
+    padding: 0;
+    border: none;
+    margin-bottom: 16px;
+    gap: 24px;
+}
+
+.fiados-list {
+    max-height: 320px;
+    overflow-y: auto;
+    border: 1px solid #232526;
+    background: #232526;
+    border-radius: 0;
+    padding: 16px 8px;
+}
+
+.fiado-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #232526;
+    background: none;
+    border-left: none;
+    border-radius: 0;
+    transition: none;
+}
+.fiado-item:last-child {
+    border-bottom: none;
+}
+.fiado-item.paid {
+    background: none;
+}
+.fiado-item.overdue {
+    background: none;
+}
+.fiado-info {
+    flex: 1;
+}
+.fiado-name {
+    font-weight: 600;
+    color: #F3F3F3;
+    font-size: 1em;
+    margin-bottom: 2px;
+}
+.fiado-turma {
+    font-size: 0.95em;
+    color: #BDBDBD;
+    margin-bottom: 2px;
+}
+.fiado-product {
+    font-weight: 500;
+    color: #7EE787;
+    margin-bottom: 2px;
+}
+.fiado-date {
+    font-size: 0.85em;
+    color: #888;
+}
+.fiado-status {
+    font-size: 0.85em;
+    padding: 2px 6px;
+    border-radius: 0;
+    font-weight: 600;
+    margin-left: 8px;
+    background: none;
+}
+.fiado-status.pending {
+    color: #FFD600;
+}
+.fiado-status.paid {
+    color: #7EE787;
+}
+.fiado-status.overdue {
+    color: #FF6F6F;
+}
+.fiado-price {
+    font-weight: 600;
+    color: #7EE787;
+    font-size: 1em;
+    margin-right: 10px;
+}
+.fiado-actions {
+    display: flex;
+    gap: 6px;
+}
+.pay-btn {
+    background: #232526;
+    color: #7EE787;
+    border: 1px solid #7EE787;
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 0;
+}
+.pay-btn:hover {
+    background: #181A1B;
+    color: #F3F3F3;
+    border-color: #F3F3F3;
+}
+.pay-btn:disabled {
+    background: #232526;
+    color: #555;
+    border-color: #232526;
+    cursor: not-allowed;
+}
+.delete-fiado-btn {
+    background: #181A1B;
+    color: #F3F3F3;
+    border: 1px solid #232526;
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 0;
+}
+.delete-fiado-btn:hover {
+    background: #232526;
+    color: #FF6F6F;
+    border-color: #FF6F6F;
+}
+.empty-fiados {
+    text-align: center;
+    color: #555;
+    font-style: italic;
+    padding: 32px;
+}
+
+.sales-section {
+    border-bottom: 1px solid #232526;
+}
+
+.sales-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: #232526;
+    color: #F3F3F3;
+    border: 1px solid #232526;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 0;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.filter-btn:hover, .filter-btn.active {
+    background: #282C2F;
+    color: #7EE787;
+    border-color: #7EE787;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.clear-btn, .export-btn {
+    width: auto;
+    padding: 8px 18px;
+    font-size: 13px;
+    border-radius: 0;
+}
+.clear-btn {
+    background: #232526;
+    color: #FF6F6F;
+    border: 1px solid #FF6F6F;
+}
+.clear-btn:hover {
+    background: #181A1B;
+    color: #F3F3F3;
+    border-color: #F3F3F3;
+}
+.export-btn {
+    background: #232526;
+    color: #7EE787;
+    border: 1px solid #7EE787;
+}
+.export-btn:hover {
+    background: #181A1B;
+    color: #F3F3F3;
+    border-color: #F3F3F3;
+}
+
+.sales-summary {
+    display: flex;
+    gap: 24px;
+    background: none;
+    padding: 0;
+    border: none;
+    margin-bottom: 16px;
+}
+
+.summary-item {
+    text-align: left;
+    flex: 1;
+    min-width: 120px;
+}
+
+.summary-label {
+    display: block;
+    font-size: 0.95em;
+    color: #BDBDBD;
+    margin-bottom: 2px;
+}
+
+.summary-value {
+    display: block;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #7EE787;
+}
+
+.sales-history {
+    max-height: 320px;
+    overflow-y: auto;
+    border: 1px solid #232526;
+    background: #232526;
+    border-radius: 0;
+    padding: 16px 8px;
+}
+
+.sale-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #232526;
+    background: none;
+    border-radius: 0;
+    transition: none;
+}
+.sale-item:last-child {
+    border-bottom: none;
+}
+.sale-info {
+    flex: 1;
+}
+.sale-product {
+    font-weight: 500;
+    color: #F3F3F3;
+    margin-bottom: 2px;
+}
+.sale-details {
+    font-size: 0.95em;
+    color: #BDBDBD;
+}
+.sale-payment {
+    font-size: 0.85em;
+    padding: 2px 6px;
+    border-radius: 0;
+    font-weight: 600;
+    margin-left: 8px;
+    background: none;
+}
+.sale-payment.money {
+    color: #7EE787;
+}
+.sale-payment.pix {
+    color: #FFD600;
+}
+.sale-price {
+    font-weight: 600;
+    color: #7EE787;
+    font-size: 1em;
+}
+.sale-date {
+    font-size: 0.85em;
+    color: #888;
+    margin-top: 2px;
+}
+.empty-sales {
+    text-align: center;
+    color: #555;
+    font-style: italic;
+    padding: 32px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(24, 26, 27, 0.95);
+    animation: none;
+}
+
+.modal-content {
+    background-color: #232526;
+    margin: 8% auto;
+    padding: 0;
+    border-radius: 0;
+    width: 95%;
+    max-width: 350px;
+    box-shadow: none;
+    animation: none;
+}
+
+.modal-header {
+    background: #232526;
+    color: #F3F3F3;
+    padding: 32px;
+    border-radius: 0;
+    border-bottom: 1px solid #282C2F;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #F3F3F3;
+}
+
+.close {
+    color: #F3F3F3;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.close:hover {
+    color: #FF6F6F;
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+.product-summary, .fiado-summary {
+    text-align: center;
+    margin-bottom: 18px;
+    padding: 0;
+    background: none;
+    border-radius: 0;
+}
+
+.product-summary h4, .fiado-summary h4 {
+    color: #F3F3F3;
+    margin-bottom: 6px;
+}
+
+.product-summary p, .fiado-summary p {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #7EE787;
+    margin: 0 0 12px 0;
+}
+
+.fiado-summary p {
+    font-size: 1em;
+    color: #BDBDBD;
+    margin-bottom: 10px;
+}
+
+.fiado-total {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #7EE787;
+    margin-top: 10px;
+    padding: 10px 0;
+    background: none;
+    border-radius: 0;
+    border: none;
+}
+
+.quantity-selector {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #232526;
+}
+
+.quantity-selector label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #BDBDBD;
+}
+
+.quantity-controls-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.quantity-btn-modal {
+    background: #181A1B;
+    color: #F3F3F3;
+    border: 1px solid #232526;
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 0;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.quantity-btn-modal:hover {
+    background: #232526;
+    color: #7EE787;
+    border-color: #7EE787;
+}
+.quantity-btn-modal:disabled {
+    background: #232526;
+    color: #555;
+    border-color: #232526;
+    cursor: not-allowed;
+}
+
+#saleQuantity {
+    width: 60px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 8px;
+    border: 1px solid #232526;
+    border-radius: 0;
+    background: #181A1B;
+    color: #F3F3F3;
+}
+
+.total-price {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #7EE787;
+    margin-top: 10px;
+    padding: 10px 0;
+    background: none;
+    border-radius: 0;
+    border: none;
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.payment-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 0;
+    border: 1px solid #232526;
+    border-radius: 0;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    background: #232526;
+    color: #F3F3F3;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.payment-btn:hover {
+    background: #282C2F;
+    color: #7EE787;
+    border-color: #7EE787;
+}
+.money-btn {
+    border-left: 4px solid #7EE787;
+}
+.pix-btn {
+    border-left: 4px solid #FFD600;
+}
+.payment-icon {
+    font-size: 18px;
+}
+.payment-text {
+    font-size: 15px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        margin: 0;
+        border-radius: 0;
+    }
+    h1 {
+        font-size: 1.3em;
+        padding: 18px 0 12px 0;
+    }
+    .form-section, .products-section, .fiados-section, .sales-section {
+        padding: 14px 0;
+    }
+    .fiados-toggle-section {
+        padding: 10px 0;
+    }
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    .stats-section {
+        flex-direction: column;
+    }
+    .form-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .sales-controls, .fiados-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .filter-buttons {
+        justify-content: flex-start;
+    }
+    .action-buttons {
+        justify-content: flex-start;
+    }
+    .clear-btn, .export-btn {
+        width: 100%;
+    }
+    .sales-summary, .fiados-summary {
+        flex-direction: column;
+        text-align: left;
+    }
+    .fiado-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    .fiado-actions {
+        justify-content: flex-start;
+    }
+    .modal-content {
+        margin: 18% auto;
+        width: 99%;
+    }
+    .payment-btn {
+        padding: 10px 0;
+        font-size: 14px;
+    }
+    .quantity-controls-modal {
+        gap: 6px;
+    }
+    .quantity-btn-modal {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+    #saleQuantity {
+        width: 48px;
+        font-size: 14px;
+        padding: 6px;
+    }
+}
+
+.add-product-toggle-section {
+    padding: 18px 0;
+    background: none;
+    border-bottom: none;
+    text-align: left;
+}
+.toggle-product-btn {
+    background: #232526;
+    color: #F3F3F3;
+    border: 1px solid #232526;
+    padding: 12px 0;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    margin-bottom: 0;
+}
+.toggle-product-btn:hover, .toggle-product-btn.active {
+    background: #282C2F;
+    color: #7EE787;
+    border-color: #7EE787;
+}
+.toggle-product-btn .toggle-icon {
+    font-size: 18px;
+}
+.toggle-product-btn .toggle-text {
+    font-size: 15px;
+    font-weight: 500;
+}
+.toggle-product-btn .toggle-arrow {
+    font-size: 13px;
+    transition: transform 0.3s;
+}
+.toggle-product-btn.active .toggle-arrow {
+    transform: rotate(180deg);
+}
